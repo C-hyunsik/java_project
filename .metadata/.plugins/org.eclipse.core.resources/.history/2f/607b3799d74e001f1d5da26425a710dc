@@ -1,0 +1,31 @@
+package stream;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class StreamMain {
+
+	public static void main(String[] args) {
+		List<String> list = new ArrayList<>();
+		list.add("이제훈");
+		list.add("엄태구");
+		list.add("이동욱");
+		list.add("안효섭");
+		list.add("이준기");
+		list.add("나인우");
+		
+		for(int i = 0; i < list.size(); i++) {	//외부반복
+			System.out.println(list.get(i));
+		}
+		System.out.println();
+		
+		Iterator<String> it = list.iterator();	//외부반복
+		while(it.hasNext()) {
+			System.out.println(it.next());
+		}
+		System.out.println();
+
+	}
+
+}

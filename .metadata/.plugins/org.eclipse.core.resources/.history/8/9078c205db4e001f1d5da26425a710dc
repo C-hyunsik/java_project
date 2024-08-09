@@ -1,0 +1,64 @@
+package stream;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+class Food{
+	String name;
+	int calorie;
+}
+
+public class StreamMain02 {
+
+	public static void main(String[] args) {
+		Food aa = new Food("탕수육", 616);
+		Food bb = new Food("라면", 460);
+		Food cc = new Food("돈까스", 960);
+		Food dd = new Food("떡볶이", 482);
+		Food ee = new Food("짜장면", 670);
+		
+		List<Food> list = new ArrayList<>();
+		list.add(aa);
+		list.add(bb);
+		list.add(cc);
+		list.add(dd);
+		list.add(ee);
+		
+		List<Food> callist = new ArrayList<Food>();
+		for(Food food : list) {
+			if(food.getCalorie()>500) {
+				callist.add(food);
+			}
+		}
+		Comparator<Food> com = new Comparator<Food>() {
+			
+			@Override
+			public int compare(Food f1, Food f2) {
+				if(f1.getCalorie() < f2.getCalorie()) {
+					return 1;	
+				}
+				else if(f1.getCalorie() > f2.getCalorie())
+				return -1;
+				else
+					return 0;
+			}
+		};
+		Collections.sort(callist, com);
+		System.out.println("for문으로 출력");
+		for(int i = 0; i < callist.size(); i++) {	//외부반복
+			System.out.println(callist.get(1));
+		}
+	}
+
+}

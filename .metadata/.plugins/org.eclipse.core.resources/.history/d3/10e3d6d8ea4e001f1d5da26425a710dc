@@ -1,0 +1,21 @@
+package network;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+
+public class ChatHandler {
+	ChatServer chatServer;
+	Socket socket;
+	DataInputStream dis;
+	DataOutputStream dos;
+	String chatName;
+	String clientIP;
+
+	public ChatHandler(ChatServer chatServer, Socket socket) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+
+}

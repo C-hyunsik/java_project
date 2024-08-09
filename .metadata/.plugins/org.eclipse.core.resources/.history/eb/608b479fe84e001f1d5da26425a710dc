@@ -1,0 +1,13 @@
+package network;
+
+import java.net.Socket;
+
+public class ChatHandler {
+
+	public ChatHandler(ChatServer chatServer, Socket socket) {
+		// TODO Auto-generated constructor stub
+	}
+
+	
+
+}

@@ -1,0 +1,23 @@
+package while_;
+
+public class DoWhile {
+
+	public static void main(String[] args) {
+		//A B C D E F G ~~ X Y Z
+		char ch = 'A';
+		int count = 0;
+		do {
+			System.out.print(ch + " ");
+			ch++;
+			count++;
+				if(count % 7 == 0) {
+					System.out.println();
+				}
+			
+		}while(ch<='Z');
+	}
+}
+
+/*
+[문제] A ~ Z 출력하되 1줄에 7개씩 출력하시오
+*/

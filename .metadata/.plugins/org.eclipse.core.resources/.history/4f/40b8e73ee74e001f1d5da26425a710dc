@@ -1,0 +1,81 @@
+package network;
+
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class ChatServer {
+	ServerSocket serverSocket;	//클라이언트의 연결 요청을 수락
+	ExecutorService threadPool = Executors.newFixedThreadPool(100);	//100개의 클라이언트가 동시에 채팅가능
+	Map<String, ChatHandler> chatRoom = Collections.synchronizedMap(new HashMap<>());
+	//통신용 ChatHandler를 관리하는 동기화된 Map 컬렉션
+	
+	
+	private void start() throws IOException {
+		serverSocket = new ServerSocket(9500);
+		System.out.println("서버 준비 완료");
+		
+		Thread thread = new Thread(() -> {
+			try {
+				while(true) {
+					Socket socket = serverSocket.accept();	//연결 수락하고, 통신용 ChatHandler를 반복해서 생성
+					ChatHandler chatHandler = new ChatHandler(this, socket);
+					
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		});	//Runnable를 람다식 제공
+		
+		thread.start();	//스레드 시작
+		
+	}//start()
+	
+	private void stop() {
+		try {
+			serverSocket.close();
+			threadPool.shutdownNow();
+			
+			//chatRoom에 있는 모든 ChatHandler를 닫는다
+			//chatRoom.values()로 Collection<ChatHandler>를 얻고, 요소 스트림을 이용해서 전체 ChatHandler의 close()를 호출
+			chatRoom.values().stream().forEach(sc -> sc.close());
+			
+			System.out.println("서버 종료");
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}//stop()
+	
+	public static void main(String[] args) {
+		try {
+		ChatServer chatServer = new ChatServer();
+		chatServer.start();
+		
+		System.out.println();
+		System.out.println("서버를 종료하려면  q를 입력하세요");
+		System.out.println();
+		
+		Scanner sc = new Scanner(System.in);
+		while(true) {
+			String key = sc.nextLine();
+			if(key.toLowerCase().equals("q")) break;
+		}	
+			sc.close();
+			
+			chatServer.stop();
+			
+		}catch(IOException e) {
+			System.out.println("[서버] " + e.getMessage());
+		}
+		
+	}
+
+}

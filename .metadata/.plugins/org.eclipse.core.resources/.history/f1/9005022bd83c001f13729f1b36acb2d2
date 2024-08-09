@@ -1,0 +1,14 @@
+package while_;
+
+public class DoWhile {
+
+	public static void main(String[] args) {
+		//A B C D E F G ~~ X Y Z
+		char ch = 'A';
+		
+		do {
+			System.out.println(ch);
+			ch++;
+		}while(ch<='Z');
+	}
+}

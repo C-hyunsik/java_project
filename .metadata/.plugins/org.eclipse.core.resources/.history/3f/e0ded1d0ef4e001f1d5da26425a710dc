@@ -1,0 +1,53 @@
+package network;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+public class ChatHandler {
+	ChatServer chatServer;
+	Socket socket;
+	DataInputStream dis;
+	DataOutputStream dos;
+	String chatName;
+	String clientIP;
+
+	public ChatHandler(ChatServer chatServer, Socket socket) throws IOException {
+		this.chatServer = chatServer;
+		this.socket = socket;
+		
+		dis = new DataInputStream(socket.getInputStream());
+		dos = new DataOutputStream(socket.getOutputStream());
+		
+		InetSocketAddress isa = (InetSocketAddress) socket.getRemoteSocketAddress();
+		clientIP = isa.getHostName();
+		
+		receive();
+	}
+	//클라이언트로부터 오는 JSON 데이터 받기
+	private void receive() {
+		
+		
+	}
+	//클라이언트로 JSON데이터 보내기
+	public void send(String json) {
+		try {
+			dos.writeUTF(json);
+			dos.flush();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+		
+	}
+	
+
+	public void close() {
+		try {
+			socket.close();
+		} catch (IOException e) {
+			//e.printStackTrace();
+		}
+	}
+}

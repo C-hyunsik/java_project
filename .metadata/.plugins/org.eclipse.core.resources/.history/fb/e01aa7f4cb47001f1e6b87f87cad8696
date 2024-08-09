@@ -1,0 +1,22 @@
+package io;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class ObjectMain {
+
+	public static void main(String[] args) throws IOException {
+		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("result2.txt"));
+		
+		PersonDTO dto = new PersonDTO("홍길동", 25, 185.3);
+		oos.writeObject(dto);
+		oos.close();
+		
+		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("result2.txt"));
+		
+		System.out.println(ois);
+	}
+}

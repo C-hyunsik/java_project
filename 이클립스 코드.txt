@@ -1,0 +1,395 @@
+이클립스 코드
+1. HelloTest
+package basic;
+
+public class HelloTest {
+	public static void main(String[] args) {
+		System.out.println("안녕하세요");
+		System.out.println();
+		
+		System.out.println('A'+ 32);			//97
+		System.out.println((char)('A'+ 32));	//a 강제형변환, Cast
+		System.out.println();
+		System.out.println('2' + '3');			//101
+		//결과가 5가 나오도록 하시오
+		System.out.println('2' + '3' - 96);
+		
+		System.out.println("2" + "3");			//23
+		//결과가 5가 나오도록 하시오
+		System.out.println(Integer.parseInt("2") + Integer.parseInt("3"));
+		
+		System.out.println("12.5" + "36.8");
+		//결과가 49.3가 나오도록 하시오
+		System.out.println(Double.parseDouble("12.5") + Double.parseDouble("36.8"));
+	}
+
+}
+
+[실행결과]
+안녕하세요
+
+97
+a
+
+101
+5
+23
+5
+12.536.8
+49.3
+
+2.Compute
+package basic;
+
+import java.text.DecimalFormat;
+
+//기본 패키지가 java.lang이기 때문에 아래의 문장을 쓸 필요가 없다
+import java.lang.String;
+import java.lang.System;
+
+public class Compute {
+
+	public static void main(String[] args) {
+		short a = 320;
+		short b = 258;
+		int sum = a + b;
+		int sub = a - b;
+		int mul = a * b;
+		double div = (double)a / b;		//강제형변환
+		
+		System.out.println(a + " + " + b + " = " + sum);
+		System.out.println(a + " - " + b + " = " + sub);
+		System.out.println(a + " * " + b + " = " + new DecimalFormat().format(mul));
+		System.out.println(a + " / " + b + " = " + String.format("%.2f",(div)));
+		//String.format("%전체자리수(생략가능).소수자릿수%f",값)
+		//new DecimalFormat().format(값) -> 값의 3자리마다 쉼표
+	}
+
+}
+
+/*
+ [문제] 변수를 이용하여 320, 258의 합(sum), 차(sub), 곱(mul), 몫(div)을 구하시오
+
+[실행결과]
+320 + 258 = 578
+320 - 258 = 62
+320 * 258 = 82560
+320 / 258 = 1.2403100775193798		String.format("%.2f",div)를 적용했을때 : 1.24
+ */
+
+3.Variable
+package basic;
+
+public class Variable {
+
+	public static void main(String[] args) {
+		boolean a = 25>36;		//대입
+		System.out.println(a);
+		
+		char b = 'A';
+		System.out.println(b);
+		
+		char c = 65;
+		System.out.println(c);	//A
+		System.out.println();
+		
+		//byte d = 300; -error : 300이 byte에 들어가지 못함
+		
+		int e = 65;
+		System.out.println(e);
+		int f = 'A';
+		System.out.println(f);	//65
+		long g = 25L;	//long형 상수
+		System.out.println(g);
+		//float h = 43.8;	-error
+		
+		//첫 번째
+		//float h = 43.8f;	//float형 상수
+		
+		//두 번째
+		float h = (float)43.8;	//Casting 강제형변환
+		System.out.println(h);
+	}
+
+}
+
+[실행결과]
+false
+A
+A
+
+65
+65
+25
+43.8
+
+4.Variable2
+package basic;
+
+public class Variable2 {
+
+	int a;	//필드(class 소속), 이미 초기화(0), 요청!
+	static int b;	//미리 만들어짐
+	static String c;	//클래스 타입의 초기값은 null
+	//c = "apple";	-error : 함수 안에 써야 한다.
+	public static void main(String[] args) {
+		int a=100;	//local variable 지역변수, 쓰레기값(초기화 필요)
+		
+		System.out.println(a);
+		//int a;	-error 지역변수 이름 중복
+		System.out.println("필드 a = " + new Variable2().a);	//new 요청!
+		System.out.println("필드 b = " + b);
+		//c = "apple";		//String 타입은 new 없어도 된다. 리터럴 생성.
+		c = new String("apple");
+		System.out.println("필드 c = " + c);
+	}
+
+}
+
+[실행결과]
+100
+필드 a = 0
+필드 b = 0
+필드 c = apple
+
+5.Variable3
+package basic;
+
+import java.util.Random;
+
+public class Variable3 {
+
+	public static void main(String[] args) {
+		int big = Math.max(25,36);
+		
+		System.out.println("큰 값 = " + big);
+		
+		//12.7, 78.5중에서 작은 값을 구하시오
+		double small = Math.min(12.7, 78.5);
+		System.out.println("작은 값 = " + small);
+		/*double a = 12.7;
+		double b = 78.5;
+		System.out.println(a + "와 " + b + "중 더 작은 값은 " + small + "이다.");*/
+		
+		//2의 5승
+		double power = Math.pow(2, 5);
+		System.out.println("2의 5승 = "+ power);
+		
+		//난수
+		//컴퓨터가 불규칙하게 발생하는 수
+		//0<= 난수 < 1
+		double a = Math.random();
+		int c = (int)(a * 100);
+		int x = 65;
+		int y = 90;
+		int d = (int)(Math.random() * (y-x+1) + x);// x ~ y 사이의 난수 발생  (int)(Math.random() * (y-x+1) + x)
+		char e = (char)(Math.random() * (y-x+1) + x);
+		
+		System.out.println(a);
+		System.out.println(c);
+		System.out.println(d);
+		System.out.println(e);
+		
+		double b = new Random().nextDouble();
+		System.out.println(b);
+	}
+
+}
+
+[실행결과]
+큰 값 = 36
+작은 값 = 12.7
+2의 5승 = 32.0
+0.2937965885334971		난수
+29					난수를 소수둘째자리에서 정수로 올림
+69					65~90사이의 난수를 소수둘째자리에서 정수로 올림
+X					65에서 90사이의 난수를 소수둘째자리에서 올린 정수에 대응되는 아스키코드의 알파벳
+0.789033665000635		난수
+
+6.Input
+package basic;
+import java.util.Scanner;
+public class Input {
+
+	public static void main(String[] args) {
+		Scanner scan = new Scanner(System.in);	//키보드를 통해서 입력할 수 있는 클래스 생성
+		/* int scan;		정수형 변수
+		 * double scan;		실수형 변수
+		 * Scanner scan;	객체(클래스형 변수)
+		 */
+		System.out.print("정수형 데이터 입력 : ");
+		int a = scan.nextInt();
+		System.out.print("실수형 데이터 입력 : ");
+		double b = scan.nextDouble();
+		System.out.println(a + " + " + b + " = " + (a + b));
+		
+		scan.close();
+	}
+
+}
+
+[실행결과]
+정수형 데이터 입력 : 25				Scanner를 활용해 데이터 입력
+실수형 데이터 입력 : 35.5			Scanner를 활용해 데이터 입력
+25 + 35.5 = 60.5
+
+7.Jinsu
+package homework;
+import java.util.Scanner;
+
+
+public class Jinsu {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("10진수 데이터 입력 : ");
+		int dec = sc.nextInt();
+		String bin = Integer.toBinaryString(dec);
+		System.out.println("2진수 = " + bin);
+		String oct = Integer.toOctalString(dec);
+		System.out.println("8진수 = " + oct);
+		String hex = Integer.toHexString(dec);
+		System.out.println("16진수 = " + hex);
+		
+
+		sc.close();
+	}
+
+}
+/*
+정수형 데이터를 입력하여 2진수 8진수 16진수로 변환한 값을 출력하시오.
+2진수, 8진수, 16진수로 변환한 값을 출력하시오
+
+[조건]
+2진수, 8진수, 16진수로 변환시켜주는 메소드를 이용하시오 - Integer
+
+[실행결과]
+10진수 데이터 입력 : 250 (dec)			Scanner를 활용해 10진수 데이터를 입력
+
+2진수 = 1111 1010 (bin)				2진수로 변환된 데이터출력
+8진수 = 372 (oct)						8진수로 변환된 데이터출력
+16진수 = fa (hex)						16진수로 변환된 데이터출력
+*/
+
+8.Sungjuk
+package homework;
+
+public class Sungjuk {
+
+	public static void main(String[] args) {
+		char name = 'L';
+		int kor = 85;
+		int eng = 90;
+		int math = 100;
+		int tot = kor + eng + math;
+		//double avg = (double)tot / 3;
+		String avg = String.format("%.3f", (double)tot / 3);
+		System.out.println("\t*** " + name + " 성적표 ***");
+		System.out.println("국어\t영어\t수학\t총점\t평균");
+		//System.out.println(kor + "\t" + eng + "\t" + math + "\t" + tot + "\t" + String.format("%.3f", avg));
+		System.out.println(kor + "\t" + eng + "\t" + math + "\t" + tot + "\t" + avg);
+	}
+
+}
+/*
+[문제] 성적 계산
+이름이 L(name)이고 국어점수 85(kor), 영어점수 90(eng), 수학점수 100(math)일때
+총점(tot)과 평균(avg)을 구하시오
+
+[조건]
+총점 = 국어 + 영어 + 수학
+평균 = 총점 / 과목수
+평균의 소수이하 3째자리까지 출력
+
+[실행결과]
+ *** L 성적표 ***
+국어 영어 수학 총점 평균
+85  90  100 xxx xx.xxx
+*/
+[실제실행결과]
+	*** L 성적표 ***
+국어	영어	수학	총점	평균
+85	90	100	275	91.667
+
+9.Salary
+package homework;
+
+import java.text.DecimalFormat;
+import java.util.Scanner;
+
+public class Salary {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		//DecimalFormat df = new DecimalFormat();
+		System.out.print("이름 입력 : ");
+		String name = sc.next();
+		System.out.print("직급 입력 : ");
+		String rank = sc.next();
+		System.out.print("기본급 입력 : ");
+		int nor = sc.nextInt();
+		System.out.print("수당 입력 : ");
+		int ex = sc.nextInt();
+		
+		int sum = nor + ex;
+		int tax = (int)(sum * 0.03);
+		int sal = sum - tax;
+		
+		System.out.println("*** " + name + " " + rank + " " + "월급 ***");
+		System.out.println("기본급 : " + new DecimalFormat().format(nor) +"원");
+		System.out.println("수당 : " + new DecimalFormat().format(ex) +"원");
+		System.out.println("합계 : " + new DecimalFormat().format(sum) +"원");
+		System.out.println("세금 : " + new DecimalFormat().format(tax) +"원");
+		System.out.println("월급 : " + new DecimalFormat().format(sal) +"원");
+		/*
+		System.out.println("기본급 : " + df.format(nor) +"원");
+		System.out.println("수당 : " + df.format(ex) +"원");
+		System.out.println("합계 : " + df.format(sum) +"원");
+		System.out.println("세금 : " + df.format(tax) +"원");
+		System.out.println("월급 : " + df.format(sal) +"원");
+		 */
+		
+		sc.close();
+
+	}
+
+}
+/*
+[문제] 월급 계산 프로그램
+이름, 직급, 기본급, 수당을 입력하여 합계, 세금, 월급을 출력하시오
+       
+합계 = 기본급 + 수당
+세금 = 합계 * 세율
+월급 = 합계 - 세금
+
+[조건]
+1. 세율은 3%으로 한다.(0.03)
+2. 숫자는 3자리마다 , 표시 - DecimalFormat클래스 사용
+3. 소수이하는 표시하지 않는다. (정수형)
+4. Scanner 클래스 사용.
+
+[실행결과]
+이름 입력 : 홍길동
+직급 입력 : 부장
+기본급 입력 : 4900000
+수당 입력 : 200000
+
+*** 홍길동 부장 월급 ***
+기본급 : 4,900,000원
+수당 : 200,000원
+합계 : 5,100,000원
+세금 : 153,000원
+월급 : 4,947,000원
+*/
+
+[실제실행결과]
+이름 입력 : 홍길동			Scanner에서 "홍길동"입력
+직급 입력 : 부장				Scanner에서 "부장"입력
+기본급 입력 : 4900000			Scanner에서 "4,900,000"입력
+수당 입력 : 200000			Scanner에서 "200,000"입력
+*** 홍길동 부장 월급 ***
+기본급 : 4,900,000원
+수당 : 200,000원
+합계 : 5,100,000원
+세금 : 153,000원
+월급 : 4,947,000원

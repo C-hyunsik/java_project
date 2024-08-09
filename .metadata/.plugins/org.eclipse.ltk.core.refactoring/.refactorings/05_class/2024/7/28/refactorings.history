@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;homeswork&apos; to &apos;homework&apos;&#x0D;&#x0A;- Original project: &apos;05_class&apos;&#x0D;&#x0A;- Original element: &apos;05_class/src/homeswork&apos;&#x0D;&#x0A;- Renamed element: &apos;05_class/src/homework&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;homeswork&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;homeswork" name="homework" qualified="false" references="true" stamp="1720688371438" textual="false" version="1.0"/>
+</session>
